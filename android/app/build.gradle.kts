@@ -9,6 +9,7 @@ android {
     namespace = "ru.hse.catinder"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "28.0.13004108"
+    minSdk = 30
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

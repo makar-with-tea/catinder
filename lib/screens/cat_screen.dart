@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catinder/models/breed_model.dart';
 import 'package:catinder/views/cat_loading_indicator.dart';
+import 'package:catinder/views/clickable_link.dart';
 import 'package:flutter/material.dart';
 
 import '../models/cat_model.dart';
@@ -109,7 +110,7 @@ class CatScreen extends StatelessWidget {
                   ),
                 ),
               if (breed.wikipediaUrl != null)
-                Text(breed.wikipediaUrl!),
+                ClickableLink(url: breed.wikipediaUrl!),
             ],
           ),
         ),
