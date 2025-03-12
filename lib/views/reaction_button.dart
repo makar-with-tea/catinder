@@ -17,5 +17,4 @@ class ReactionButton extends StatelessWidget {
       color: Theme.of(context).colorScheme.primary,
     );
   }
-
 }

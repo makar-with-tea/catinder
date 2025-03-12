@@ -5,11 +5,7 @@ class CatModel {
   final String? url;
   final List<BreedModel>? breeds;
 
-  CatModel({
-    this.id,
-    this.url,
-    this.breeds,
-  });
+  CatModel({this.id, this.url, this.breeds});
 
   @override
   String toString() {

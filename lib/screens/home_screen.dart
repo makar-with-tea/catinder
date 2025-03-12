@@ -113,8 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ReactionButton(
-                        icon: Icon(Icons.heart_broken_sharp),
-                        onPressed: _onDislike,
+                      icon: Icon(Icons.heart_broken_sharp),
+                      onPressed: _onDislike,
                     ),
                     ReactionButton(
                       icon: Icon(Icons.favorite),

@@ -81,9 +81,7 @@ class _TinderCardState extends State<TinderCard> {
         ),
         child: CardContent(
           photoUrl: widget.cat.url,
-          caption:
-              widget.cat.breeds?[0].name ??
-              'Unknown kitty',
+          caption: widget.cat.breeds?[0].name ?? 'Unknown kitty',
         ),
       ),
     );

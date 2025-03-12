@@ -88,8 +88,7 @@ class CatScreen extends StatelessWidget {
               if (breed.vocalisation != null)
                 Text('Vocalisation: ${breed.vocalisation}'),
 
-              if (breed.tags != null)
-                SizedBox(height: 10),
+              if (breed.tags != null) SizedBox(height: 10),
               if (breed.tags != null)
                 Center(
                   child: Text(
@@ -100,8 +99,7 @@ class CatScreen extends StatelessWidget {
               if (breed.tags != null)
                 for (final tag in breed.tags!) Text(tag),
 
-              if (breed.wikipediaUrl != null)
-                SizedBox(height: 10),
+              if (breed.wikipediaUrl != null) SizedBox(height: 10),
               if (breed.wikipediaUrl != null)
                 Center(
                   child: Text(
