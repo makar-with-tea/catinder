@@ -3,6 +3,7 @@ import 'package:catinder/models/breed_model.dart';
 import 'package:catinder/views/cat_loading_indicator.dart';
 import 'package:catinder/views/clickable_link.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/cat_model.dart';
 import '../tools/error_handler.dart';
@@ -32,7 +33,7 @@ class CatScreen extends StatelessWidget {
                 placeholder: (context, url) => CatLoadingIndicator(),
                 errorWidget: (context, url, error) {
                   ErrorHandler.recordError(error, StackTrace.current);
-                  return Image.asset('assets/kitty_back.svg');
+                  return SvgPicture.asset('assets/kitty_back.svg');
                 },
               ),
 

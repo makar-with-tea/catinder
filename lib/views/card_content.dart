@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catinder/tools/error_handler.dart';
 import 'package:catinder/views/cat_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CardContent extends StatelessWidget {
   final String? photoUrl;
@@ -29,7 +30,7 @@ class CardContent extends StatelessWidget {
                 placeholder: (context, url) => CatLoadingIndicator(),
                 errorWidget: (context, url, error) {
                   ErrorHandler.recordError(error, StackTrace.current);
-                  return Image.asset('assets/kitty_back.svg');
+                  return SvgPicture.asset('assets/kitty_back.svg');
                 },
               ),
             ),
