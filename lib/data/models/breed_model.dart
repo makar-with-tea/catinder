@@ -1,4 +1,5 @@
 import 'weight_model.dart';
+import 'package:catinder/domain/entity/breed.dart';
 
 class BreedModel {
   final WeightModel? weight;
@@ -23,7 +24,7 @@ class BreedModel {
   final int? socialNeeds;
   final int? strangerFriendly;
   final int? vocalisation;
-  // boolean tags
+
   final List<String>? tags;
 
   BreedModel({
@@ -87,6 +88,33 @@ class BreedModel {
       strangerFriendly: json['stranger_friendly'],
       vocalisation: json['vocalisation'],
       wikipediaUrl: json['wikipedia_url'],
+      tags: tags,
+    );
+  }
+
+  Breed toBreed() {
+    return Breed(
+      weightMetric: weight?.metric,
+      id: id,
+      name: name,
+      temperament: temperament,
+      origin: origin,
+      description: description,
+      lifeSpan: lifeSpan,
+      altNames: altNames,
+      adaptability: adaptability,
+      affectionLevel: affectionLevel,
+      childFriendly: childFriendly,
+      dogFriendly: dogFriendly,
+      energyLevel: energyLevel,
+      grooming: grooming,
+      healthIssues: healthIssues,
+      intelligence: intelligence,
+      sheddingLevel: sheddingLevel,
+      socialNeeds: socialNeeds,
+      strangerFriendly: strangerFriendly,
+      vocalisation: vocalisation,
+      wikipediaUrl: wikipediaUrl,
       tags: tags,
     );
   }

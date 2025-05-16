@@ -1,14 +1,15 @@
-import 'package:catinder/views/card_content.dart';
 import 'package:flutter/material.dart';
 
-import '../models/cat_model.dart';
+import '../../domain/entity/cat.dart';
+import '../../generated/l10n.dart';
+import 'card_content.dart';
 
 enum SwipeDirection { left, right }
 
 class TinderCard extends StatefulWidget {
   final void Function(SwipeDirection direction) onSwipe;
   final void Function() onTap;
-  final CatModel cat;
+  final Cat cat;
   final bool canSwipe;
 
   const TinderCard({
@@ -81,7 +82,7 @@ class _TinderCardState extends State<TinderCard> {
         ),
         child: CardContent(
           photoUrl: widget.cat.url,
-          caption: widget.cat.breeds?[0].name ?? 'Unknown kitty',
+          caption: widget.cat.breeds?[0].name ?? S.of(context).unknownCat,
         ),
       ),
     );

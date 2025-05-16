@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catinder/tools/error_handler.dart';
-import 'package:catinder/views/cat_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../generated/l10n.dart';
+import 'cat_loading_indicator.dart';
 
 class CardContent extends StatelessWidget {
   final String? photoUrl;
@@ -38,7 +40,7 @@ class CardContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              caption ?? 'Unknown kitty',
+              caption ?? S.of(context).unknownCat,
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),

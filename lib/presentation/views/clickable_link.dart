@@ -1,7 +1,6 @@
+import 'package:catinder/tools/error_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../tools/logger.dart';
 
 class ClickableLink extends StatelessWidget {
   final String url;
@@ -13,7 +12,7 @@ class ClickableLink extends StatelessWidget {
     try {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } catch (e) {
-      logger.severe('Failed to launch $url: $e');
+      ErrorHandler.recordError('Failed to launch $url: $e', StackTrace.current);
     }
   }
 

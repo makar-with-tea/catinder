@@ -1,4 +1,5 @@
-import 'package:catinder/models/breed_model.dart';
+import 'package:catinder/domain/entity/cat.dart';
+import 'breed_model.dart';
 
 class CatModel {
   final String? id;
@@ -6,11 +7,6 @@ class CatModel {
   final List<BreedModel>? breeds;
 
   CatModel({this.id, this.url, this.breeds});
-
-  @override
-  String toString() {
-    return 'kitty ${breeds?[0].name}';
-  }
 
   factory CatModel.fromJson(Map<String, dynamic> json) {
     return CatModel(
@@ -20,6 +16,14 @@ class CatModel {
           (json['breeds'] as List<dynamic>?)
               ?.map((e) => BreedModel.fromJson(e as Map<String, dynamic>))
               .toList(),
+    );
+  }
+
+  Cat toDomain() {
+    return Cat(
+      id: id,
+      url: url,
+      breeds: breeds?.map((breedModel) => breedModel.toBreed()).toList(),
     );
   }
 }
