@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../domain/usecases/save_api_key_usecase.dart';
-import 'main_app.dart';
-import 'di/di.dart';
-import '../tools/error_handler.dart';
-import '../tools/logger.dart';
+import 'domain/usecases/save_api_key_usecase.dart';
+import 'presentation/main_app.dart';
+import 'presentation/di/di.dart';
+import 'tools/error_handler.dart';
+import 'tools/logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
