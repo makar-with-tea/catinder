@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       },
                       icon: const Icon(Icons.favorite),
-                      label: Text(S.of(context).likedCatsTitle),
+                      label: Text(S.of(context).likedCatsButton),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
