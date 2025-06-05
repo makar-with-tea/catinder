@@ -27,3 +27,19 @@ class CatModel {
     );
   }
 }
+
+class LikedCatModel extends CatModel {
+  final DateTime dateTime;
+
+  LikedCatModel({super.id, super.url, super.breeds, required this.dateTime});
+
+  @override
+  LikedCat toDomain() {
+    return LikedCat(
+      id: id,
+      url: url,
+      breeds: breeds?.map((breedModel) => breedModel.toBreed()).toList(),
+      dateTime: dateTime,
+    );
+  }
+}

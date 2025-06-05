@@ -6,6 +6,11 @@ class Cat {
   final List<Breed>? breeds;
 
   Cat({this.id, this.url, this.breeds});
+
+  @override
+  String toString() {
+    return 'Cat{id: $id, url: $url, breeds: ${breeds?[0].name}}';
+  }
 }
 
 class LikedCat extends Cat {

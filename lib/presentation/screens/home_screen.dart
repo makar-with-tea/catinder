@@ -1,8 +1,11 @@
+import 'package:catinder/domain/usecases/get_liked_cats_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../domain/usecases/delete_liked_cat_usecase.dart';
 import '../../domain/usecases/fetch_cats_usecase.dart';
+import '../../domain/usecases/save_liked_cat_usecase.dart';
 import '../../generated/l10n.dart';
 import '../../tools/logger.dart';
 import '../cubit/home/home_cubit.dart';
@@ -19,12 +22,18 @@ import 'liked_cats_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  static const routeName = '/home';
+
   @override
   Widget build(BuildContext context) {
     logger.info('HomeScreen build');
     return BlocProvider(
       create: (_) {
-        final cubit = HomeCubit(getIt<FetchCatsUseCase>());
+        final cubit = HomeCubit(
+          getIt<FetchCatsUseCase>(),
+          getIt<SaveLikedCatUseCase>(),
+        );
+        cubit.initState();
         logger.info('HomeCubit created');
         return cubit;
       },
@@ -86,11 +95,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        final homeCubit = context.read<HomeCubit>();
-                        final likedCats = homeCubit.likedCats;
                         getIt<NavigationService>().navigateTo(
                           LikedCatsScreen.routeName,
-                          arguments: LikedCatsCubit(likedCats),
+                          arguments: LikedCatsCubit(
+                            getIt<GetLikedCatsUseCase>(),
+                            getIt<DeleteLikedCatUseCase>(),
+                          ),
                         );
                       },
                       icon: const Icon(Icons.favorite),

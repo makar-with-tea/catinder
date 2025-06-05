@@ -25,5 +25,5 @@ void main() async {
   }
   await saveApiKeyUseCase.execute(dotenv.env['API_KEY'] ?? '');
 
-  runApp(MainApp());
+  runApp(MainAppWrapper());
 }

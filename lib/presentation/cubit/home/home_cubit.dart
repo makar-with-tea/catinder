@@ -2,19 +2,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entity/cat.dart';
 import '../../../domain/usecases/fetch_cats_usecase.dart';
+import '../../../domain/usecases/save_liked_cat_usecase.dart';
 import '../../../tools/error_handler.dart';
 import '../../../tools/logger.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final FetchCatsUseCase fetchCatsUseCase;
-  final List<LikedCat> likedCats = [];
+  final SaveLikedCatUseCase saveLikedCatUseCase;
 
-  HomeCubit(this.fetchCatsUseCase) : super(HomeLoading()) {
-    _loadCats(limit: 3);
+  HomeCubit(this.fetchCatsUseCase, this.saveLikedCatUseCase)
+    : super(HomeLoading());
+
+  void initState() {
+    // for testing purposes moved from constructor
+    loadCats(limit: 7);
   }
 
-  Future<void> _loadCats({int limit = 1}) async {
+  Future<void> loadCats({int limit = 1}) async {
     List<Cat> updatedCats = [];
     if (state is HomeMain) {
       updatedCats = (state as HomeMain).cats;
@@ -39,16 +44,20 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void likeCat(Cat cat) {
+  void likeCat(Cat cat) async {
     if (state is! HomeMain) {
       logger.warning('Cannot like cat in non-HomeMain state');
       return;
     }
-    likedCats.add(LikedCat.fromCat(cat, DateTime.now()));
-    final updatedCats = (state as HomeMain).cats..removeLast();
-    logger.info('Like cat, cats: $updatedCats');
-    emit(HomeMain(updatedCats));
-    _loadCats();
+    try {
+      await saveLikedCatUseCase.execute(LikedCat.fromCat(cat, DateTime.now()));
+      final updatedCats = (state as HomeMain).cats..removeLast();
+      logger.info('Like cat, cats: $updatedCats');
+      emit(HomeMain(updatedCats));
+      loadCats();
+    } catch (error, stackTrace) {
+      ErrorHandler.recordError(error, stackTrace);
+    }
   }
 
   void dislikeCat(Cat cat) {
@@ -59,11 +68,11 @@ class HomeCubit extends Cubit<HomeState> {
     final updatedCats = (state as HomeMain).cats..remove(cat);
     logger.info('Dislike cat, cats: $updatedCats');
     emit(HomeMain(updatedCats));
-    _loadCats();
+    loadCats();
   }
 
   void reloadCats() {
     emit(HomeLoading());
-    _loadCats(limit: 3);
+    loadCats(limit: 3);
   }
 }

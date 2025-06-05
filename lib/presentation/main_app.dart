@@ -7,7 +7,36 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../generated/l10n.dart';
 import 'di/di.dart';
+import 'global.dart';
 import 'navigation/navigation_service.dart';
+import 'network_observer.dart';
+
+// for network status
+class MainAppWrapper extends StatefulWidget {
+  const MainAppWrapper({super.key});
+
+  @override
+  State<MainAppWrapper> createState() => _MainAppWrapperState();
+}
+
+class _MainAppWrapperState extends State<MainAppWrapper> {
+  @override
+  void initState() {
+    super.initState();
+    NetworkObserver().startObserving();
+  }
+
+  @override
+  void dispose() {
+    NetworkObserver().dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const MainApp();
+  }
+}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -16,6 +45,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: getIt<NavigationService>().navigatorKey,
+      scaffoldMessengerKey: scaffoldMessengerKey,
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case CatScreen.routeName:

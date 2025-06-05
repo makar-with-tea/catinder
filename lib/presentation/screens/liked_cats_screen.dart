@@ -12,6 +12,7 @@ import '../di/di.dart';
 import '../navigation/navigation_service.dart';
 import '../views/cat_loading_indicator.dart';
 import 'cat_screen.dart';
+import 'home_screen.dart';
 
 class LikedCatsScreen extends StatelessWidget {
   static const routeName = '/liked_cats';
@@ -22,6 +23,9 @@ class LikedCatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final likedCatsCubit =
         ModalRoute.of(context)?.settings.arguments as LikedCatsCubit;
+    if (likedCatsCubit.allLikedCats.isEmpty) {
+      likedCatsCubit.loadLikedCats();
+    }
 
     return BlocProvider.value(
       value: likedCatsCubit,
@@ -41,14 +45,14 @@ class LikedCatsScreen extends StatelessWidget {
                             .map(
                               (breed) => DropdownMenuItem(
                                 value: breed,
-                                child: Text(breed),
+                                child: Text(
+                                  breed ?? S.of(context).allBreedsOption,
+                                ),
                               ),
                             )
                             .toList(),
                     onChanged: (value) {
-                      context.read<LikedCatsCubit>().filterByBreed(
-                        value ?? S.of(context).allBreedsOption,
-                      );
+                      context.read<LikedCatsCubit>().filterByBreed(value);
                     },
                   ),
                 ],
@@ -123,8 +127,13 @@ class LikedCatsScreen extends StatelessWidget {
                         },
                       ),
             );
+          } else if (state is LikedCatsLoading) {
+            return Container(
+              color: Colors.black54,
+              child: Center(child: CatLoadingIndicator()),
+            );
           } else {
-            // Unknown states
+            // Error and unknown states
             WidgetsBinding.instance.addPostFrameCallback((_) {
               showDialog(
                 context: context,
@@ -152,7 +161,9 @@ class LikedCatsScreen extends StatelessWidget {
                           // close the dialog
                           getIt<NavigationService>().goBack();
                           // go back to home screen
-                          getIt<NavigationService>().goBack();
+                          getIt<NavigationService>().navigateTo(
+                            HomeScreen.routeName,
+                          );
                         },
                         child: Text(S.of(context).likedCatsErrorButton),
                       ),

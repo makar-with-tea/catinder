@@ -33,5 +33,7 @@
   "likedCatsErrorTitle": "Error",
   "likedCatsErrorMessage": "Failed to load your liked cats. Please try later.",
   "likedCatsErrorButton": "Return home",
-  "allBreedsOption": "All breeds"
+  "allBreedsOption": "All breeds",
+  "networkUnavailableSnackbar": "Network unavailable. Please check your internet connection.",
+  "networkAvailableSnackbar": "Network connection restored."
 }

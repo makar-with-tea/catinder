@@ -24,8 +24,15 @@ dependencies:
   flutter_intl: ^0.0.1
   flutter_localizations:
     sdk: flutter
+  drift: ^2.0.0
+  drift_flutter: ^0.2.4
+  path_provider: ^2.0.1
+  connectivity_plus: ^4.0.2
+  mockito: ^5.0.17
 
 dev_dependencies:
+  drift_dev: ^2.0.0
+  build_runner: ^2.0.0
   flutter_test:
     sdk: flutter
 
